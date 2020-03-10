@@ -1,4 +1,4 @@
-## Mining stratum for Komodo and Komodo assetchains.
+## Mining stratum for Spacecoin and other komodo assetchains.
 
 Requirements
 ------------
@@ -9,7 +9,7 @@ Requirements
 
 Differences between this and Z-NOMP
 ------------
-* This is meant for Komodo mining
+* This is meant for Komodo and Komodo assetchains mining
 * Founders, Treasury, and other ZEC/ZEN specific stuff is removed
 
 Upgrade
@@ -34,7 +34,7 @@ sudo apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoco
 ```
 Now, let's build Komodo
 ```shell
-git clone https://github.com/jl777/komodo -b dev
+git clone https://github.com/komodoplatform/komodo
 cd komodo
 zcutil/fetch-params.sh
 zcutil/build.sh -j8
@@ -84,9 +84,9 @@ npm start
 
 If all went well the program should start without error and you should be able to browse to your pool website on your server via port 8080.
 
-Disable Coinbase Mode 
+Disable Coinbase Mode
 -------------
-This mode uses -pubkey to tell the daemon where the coinbase should be sent, and uses the daemons coinbase transaction rather then having the pool create the coinabse transaction. This enables special coinbase transactions, such as ac_founders and ac_script or new modes with CC vouts in the coinbase not yet created, it will work with all coins, except Full Z support described below. 
+This mode uses -pubkey to tell the daemon where the coinbase should be sent, and uses the daemons coinbase transaction rather then having the pool create the coinabse transaction. This enables special coinbase transactions, such as ac_founders and ac_script or new modes with CC vouts in the coinbase not yet created, it will work with all coins, except Full Z support described below.
 
 To enable it, change the value in the `./coins/*.json` to `"disablecb" : true`
 
@@ -116,7 +116,7 @@ Full Z Transaction Support (Sprout)
 -------------
 This is an option to force miners to use a Z address as their username for payouts
 
-In your coins file add: 
+In your coins file add:
 ```
 "privateChain": true,
 "burnFees": true
@@ -130,7 +130,7 @@ In coins/pirate.json file:
 "burnFees": true,
 "sapling": 152855
 ```
-Please note, PIRATE sapling became active around 2018-12-15 01:15UTC at block 152855 Now that this has passed this can just be set to `"sapling":true` 
+Please note, PIRATE sapling became active around 2018-12-15 01:15UTC at block 152855 Now that this has passed this can just be set to `"sapling":true`
 
 In pool_config:
 ```
@@ -154,4 +154,4 @@ Forked from ComputerGenie repo (deleted)
 Released under the GNU General Public License v2
 http://www.gnu.org/licenses/gpl-2.0.html
 
-_Forked from [z-classic/z-nomp](https://github.com/z-classic/z-nomp) which is incorrectly licensed under MIT License - see [zone117x/node-open-mining-portal](https://github.com/zone117x/node-open-mining-portal)_ 
+_Forked from [z-classic/z-nomp](https://github.com/z-classic/z-nomp) which is incorrectly licensed under MIT License - see [zone117x/node-open-mining-portal](https://github.com/zone117x/node-open-mining-portal)_
