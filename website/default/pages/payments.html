@@ -41,7 +41,7 @@
         content: function () {
             return $(this).prop('title');
         },
-        show: null, 
+        show: null,
         close: function (event, ui) {
             ui.tooltip.hover(
 
@@ -73,10 +73,10 @@
     {{ for(var p in it.stats.pools[pool].payments) { }}
         <tr>
             <td style="max-width: 475px; word-wrap: break-word;">
-                {{if (String(it.stats.pools[pool].name) == 'kmd') { }}
-                    <a href="https://kmdexplorer.io/tx/{{=it.stats.pools[pool].payments[p].txid}}"  title="View transaction" target="_blank" rel="noopener noreferrer">{{=it.stats.pools[pool].payments[p].blocks}}</a>
-                {{ } else if (String(it.stats.pools[pool].name) == 'kmdice') { }}
-                    <a href="http://kmdice.explorer.dexstats.info/tx/{{=it.stats.pools[pool].payments[p].txid}}" target="_blank" rel="noopener noreferrer">{{=it.stats.pools[pool].payments[p].blocks}}</a>
+                {{if (String(it.stats.pools[pool].name) == 'space') { }}
+                    <a href="https://explorer.spaceworks.co/tx/{{=it.stats.pools[pool].payments[p].txid}}" title="View transaction" target="_blank" rel="noopener noreferrer">{{=it.stats.pools[pool].payments[p].blocks}}</a>
+                {{ } else if (String(it.stats.pools[pool].name) == 'tspace') { }}
+                    <a href="https://explorer.tspace.spaceworks.co/tx/{{=it.stats.pools[pool].payments[p].txid}}" title="View transaction" target="_blank" rel="noopener noreferrer">{{=it.stats.pools[pool].payments[p].blocks}}</a>
                 {{ } else { }}
                     {{=it.stats.pools[pool].payments[p].blocks}}
                 {{ } }}

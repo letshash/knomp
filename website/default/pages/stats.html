@@ -143,12 +143,10 @@
                         <div style="margin-bottom: 9px; background-color: #eeeeee; min-width:600px;" title="{{if (it.stats.pools[pool].pending.confirms && it.stats.pools[pool].pending.confirms[block[0]]) { }}{{if (it.stats.pools[pool].pending.confirms[block[0]] == 1) { }}Waiting for dPoW notarization{{} else if (it.stats.pools[pool].pending.confirms[block[0]] < it.poolsConfigs[pool].paymentProcessing.minConf*2) { }}Waiting for min confirmations{{ } else { }}Queued for payment{{ } }}{{ } else { }}Waiting for payment processor to review{{ } }}">
                             <i class="fa fa-bars"></i>
                             <small>Block:</small>
-                            {{if (String(it.stats.pools[pool].name) == "kmd") { }}
-                                <a href="https://kmdexplorer.io/blocks/{{=block[0]}}" target="_blank">{{=block[2]}}</a>
-                            {{ } else if (String(it.stats.pools[pool].name) == "rkt") { }}
-                                <a href="http://rkt.explorer.dexstats.info/block/{{=block[0]}}" target="_blank">{{=block[2]}}</a>
-                            {{ } else if (String(it.stats.pools[pool].name) == "kmdice") { }}
-                                <a href="http://kmdice.explorer.dexstats.info/block/{{=block[0]}}" target="_blank">{{=block[2]}}</a>
+                            {{if (String(it.stats.pools[pool].name) == "space") { }}
+                                <a href="https://explorer.spaceworks.co/blocks/{{=block[0]}}" target="_blank">{{=block[2]}}</a>
+                            {{ } else if (String(it.stats.pools[pool].name) == "tspace") { }}
+                                <a href="https://explorer.tspace.spaceworks.co/block/{{=block[0]}}" target="_blank">{{=block[2]}}</a>
                             {{ } else { }}
                                 {{=block[2]}}
                             {{ } }}
@@ -175,12 +173,10 @@
                             {{ var block = it.stats.pools[pool].confirmed.blocks[b].split(":"); }}
                             <div style="margin-bottom: 9px; background-color: #eeeeee; min-width:600px;"><i class="fa fa-bars"></i>
                                 <small>Block:</small>
-                                {{if (String(it.stats.pools[pool].name) == "kmd") { }}
-                                <a href="https://kmdexplorer.io/blocks/{{=block[0]}}" target="_blank">{{=block[2]}}</a>
-                                {{ } else if (String(it.stats.pools[pool].name).startsWith("rkt")) { }}
-                                    <a href="http://rkt.explorer.dexstats.info/block/{{=block[0]}}" target="_blank">{{=block[2]}}</a>
-                                {{ } else if (String(it.stats.pools[pool].name).startsWith("kmdice")) { }}
-                                    <a href="http://kmdice.explorer.dexstats.info/block/{{=block[0]}}" target="_blank">{{=block[2]}}</a>
+                                {{if (String(it.stats.pools[pool].name) == "space") { }}
+                                <a href="https://explorer.spaceworks.co/blocks/{{=block[0]}}" target="_blank">{{=block[2]}}</a>
+                                {{ } else if (String(it.stats.pools[pool].name) == "tspace") { }}
+                                    <a href="https://explorer.tspace.spaceworks.co/block/{{=block[0]}}" target="_blank">{{=block[2]}}</a>
                                 {{ } else { }}
                                     {{=block[2]}}
                                 {{ } }}
