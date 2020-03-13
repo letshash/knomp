@@ -76,7 +76,7 @@
                 {{if (String(it.stats.pools[pool].name) == 'space') { }}
                     <a href="https://explorer.spaceworks.co/tx/{{=it.stats.pools[pool].payments[p].txid}}" title="View transaction" target="_blank" rel="noopener noreferrer">{{=it.stats.pools[pool].payments[p].blocks}}</a>
                 {{ } else if (String(it.stats.pools[pool].name) == 'tspace') { }}
-                    <a href="https://explorer.tspace.spaceworks.co/tx/{{=it.stats.pools[pool].payments[p].txid}}" title="View transaction" target="_blank" rel="noopener noreferrer">{{=it.stats.pools[pool].payments[p].blocks}}</a>
+                    <a href="https://tspace.explorer.spaceworks.co/tx/{{=it.stats.pools[pool].payments[p].txid}}" title="View transaction" target="_blank" rel="noopener noreferrer">{{=it.stats.pools[pool].payments[p].blocks}}</a>
                 {{ } else { }}
                     {{=it.stats.pools[pool].payments[p].blocks}}
                 {{ } }}
