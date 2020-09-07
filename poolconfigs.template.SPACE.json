@@ -1,0 +1,67 @@
+{
+"enabled":true,
+"coin": "SPACE.json",
+"address": "pool address",
+"zAddress": "",
+"tAddress": "pool address",
+"walletInterval": 5,
+"rewardRecipients": {
+        "feesAddress": 3.0
+},
+"tlsOptions": { "enabled": false },
+"paymentProcessing": {
+        "enabled": true,
+        "payOnStart": true,
+        "minConf": 10,
+        "paymentMode": "prop",
+        "paymentInterval": 300,
+        "minimumPayment": 0.3,
+        "maxBlocksPerPayment": 9,
+        "daemon": {
+            "host": "127.0.0.1",
+            "port": 35593,
+            "user": "rpcuser",
+            "password": "rpcpassword"
+        }
+},
+
+"trackShares": { "disable": false },
+"ports": {
+    "3393": {
+        "tls":false,
+        "diff": 0.05,
+        "varDiff": {
+            "minDiff": 0.04,
+            "maxDiff": 16,
+            "targetTime": 15,
+            "retargetTime": 60,
+            "variancePercent": 30
+        }
+    },
+    "3394": {
+         "diff": 512,
+         "tls": false,
+         "varDiff": {
+             "minDiff": 513,
+             "maxDiff": 2048,
+             "targetTime": 5,
+             "retargetTime": 30,
+             "variancePercent": 15
+          }
+      } // NICEHASH (pooled as 1 worker)
+},
+"daemons": [{
+    "host": "127.0.0.1",
+    "port": 35593,
+    "user": "rpcuser",
+    "password": "rpcpassword"
+}],
+
+"p2p": {
+        "enabled": false,
+        "host": "127.0.0.1",
+        "port": 35592,
+        "disableTransactions": true
+},
+"mposMode": { "enabled": false }
+}
