@@ -48,7 +48,7 @@
              "retargetTime": 30,
              "variancePercent": 15
           }
-      } // NICEHASH (pooled as 1 worker)
+      }
 },
 "daemons": [{
     "host": "127.0.0.1",

@@ -1,7 +1,4 @@
 node_modules/
 .idea/
 config.json
-pool_configs/
-!pool_configs/zclassic_example.json
-coins/
-website/piratepool.io/static/*.txt
+pool_configs/*.json
