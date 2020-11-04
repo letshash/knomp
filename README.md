@@ -1,4 +1,4 @@
-## Mining stratum for Spacecoin and other komodo assetchains.
+## Mining stratum for Spacecoin, Komodo, and other komodo smartchains.
 
 Requirements
 ------------
@@ -9,7 +9,7 @@ Requirements
 
 Differences between this and Z-NOMP
 ------------
-* This is meant for Komodo and Komodo assetchains mining
+* This is meant for mining Spacecoin, Komodo, and Komodo smartchains
 * Founders, Treasury, and other ZEC/ZEN specific stuff is removed
 
 Upgrade
@@ -28,31 +28,29 @@ Install Daemon
 -------------
 Some initial setup
 ```shell
-# The following packages are needed to build both Komodo and this stratum:
+# The following packages are needed to build both Spacecoin and this stratum:
 sudo apt-get update
 sudo apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoconf libtool ncurses-dev unzip git python python-zmq zlib1g-dev wget libcurl4-openssl-dev bsdmainutils automake curl libboost-dev libboost-system-dev libsodium-dev jq redis-server nano -y
 ```
-Now, let's build Komodo
+Now, let's build Spacecoin
 ```shell
-git clone https://github.com/komodoplatform/komodo
-cd komodo
+git clone https://github.com/spaceworksco/spacecoin
+cd spacecoin
 zcutil/fetch-params.sh
 zcutil/build.sh -j8
 strip src/komodod
 strip src/komodo-cli
 ```
 
-Now, let's run the assets. This will start ALL of the assets might take a day or so to sync, depending on system speed/network connection.
-
-_If you are setting up a single chain to mine and/or don't know what pubkey is, skip this step and use the startup params for the komodod daemon as provided by the individual coin's team._
+Now, let's start Spacecoin
 ```shell
-cd ~/komodo/src
-./assetchains
+cd ~/spacecoin/src
+./spacecoind
 ```
 
 Install Pool
 -------------
-Once all the chains you want on your pool have synced up we can configure the stratum.
+Once SPACE is synced up we can configure the stratum.
 
 We need node and npm installed
 
@@ -61,20 +59,18 @@ cd ~
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 ```
 
-Now, let's build our stratum and run it. This will install the pool and configure it for all the assetchains on your system automatically. It must be run from the same user as the coin deamons were launched, as it pulls the rpcuser/pass from the conf file in the home directory.
+Now, let's build our stratum and run it. This will install the pool. Then you need to configure knomp and the SPACE pool with the rpcuser/pass from the SPACE.conf file, as well as your pool/fees address.
 ```shell
-git clone https://github.com/webworker01/knomp
+git clone https://github.com/spaceworksco/knomp
 cd knomp
 npm install
-cp config_example.json config.json (and configure it)
-nano gencfg.sh
+cp config_example.json config.json
+# then configure it
+nano config.json
+cp pool_configs/example/space.json pool_configs/space.json
+# then configure it
+nano pool_configs/space.json
 ```
-
-Edit line 3 in so that it has your own KMD based address, CTRL-X then Y to save and exit
-
-We need to generate the coins files (coin daemon must be running!): `gencfg.sh <coin name>`
-
-You can run just gencfg.sh with no coin name to use the assetchains.json in komodo/src directory for all coins. Make sure you edit the template with the correct values you want before running the config generator.
 
 Finally we are ready to start the pool software
 
@@ -82,13 +78,15 @@ Finally we are ready to start the pool software
 npm start
 ```
 
-If all went well the program should start without error and you should be able to browse to your pool website on your server via port 8080.
+If all went well knomp should start without error and you should be able to browse to your pool website on your server via port 8080.
+
+## More Info:
 
 Disable Coinbase Mode
 -------------
 This mode uses -pubkey to tell the daemon where the coinbase should be sent, and uses the daemons coinbase transaction rather then having the pool create the coinabse transaction. This enables special coinbase transactions, such as ac_founders and ac_script or new modes with CC vouts in the coinbase not yet created, it will work with all coins, except Full Z support described below.
 
-To enable it, change the value in the `./coins/*.json` to `"disablecb" : true`
+To enable it, change the value in the `coins/space.json` to `"disablecb" : true`
 
 The pool fee is taken in the payment processor using this mode, and might not be 100% accurate down to the single satoshi, so the pool address may end up with some small amount of coins over time.
 
@@ -112,25 +110,14 @@ You can add an option to your pool_config to have any miners that mine with an i
 "invalidAddress":"zsValidAddressOfYourChoosingThatsNotThePoolZAddress"
 ```
 
-Full Z Transaction Support (Sprout)
--------------
-This is an option to force miners to use a Z address as their username for payouts
-
-In your coins file add:
-```
-"privateChain": true,
-"burnFees": true
-```
-
 Sapling and Sapling Payment Support
 -------------
-In coins/pirate.json file:
+In coins/space.json file:
 ```
 "privateChain": true,
 "burnFees": true,
-"sapling": 152855
+"sapling": true
 ```
-Please note, PIRATE sapling became active around 2018-12-15 01:15UTC at block 152855 Now that this has passed this can just be set to `"sapling":true`
 
 In pool_config:
 ```
