@@ -31,6 +31,13 @@ module.exports = function(logger, portalConfig, poolConfigs){
                 res.header('Content-Type', 'application/json');
                 res.end(JSON.stringify(portalStats.statPoolHistory));
                 return;
+            case 'rawblocks':
+                portalStats.getBlocks(function(data){
+                    let anonData = JSON.parse(JSON.stringify(data));
+                    res.header('Content-Type', 'application/json');
+                    res.end(JSON.stringify(anonData));
+                });
+                break;
             case 'blocks':
             case 'getblocksstats':
                 portalStats.getBlocks(function(data){
