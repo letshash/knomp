@@ -96,6 +96,29 @@ module.exports = function(logger, portalConfig, poolConfigs){
         });
     }
 
+     this.getRawBlocks = function (cback) {
+        var allBlocks = {};
+        async.each(_this.stats.pools, function(pool, pcb) {
+
+            if (_this.stats.pools[pool.name].pending && _this.stats.pools[pool.name].pending.blocks) {
+                for (var i=0; i<_this.stats.pools[pool.name].pending.blocks.length; i++) {
+                    var conf = _this.stats.pools[pool.name].pending.confirms[_this.stats.pools[pool.name].pending.blocks[i].split(':')[0]] || -1;
+                    allBlocks[pool.name+"-"+_this.stats.pools[pool.name].pending.blocks[i].split(':')[2]] = _this.stats.pools[pool.name].pending.blocks[i] + ':' + conf;
+                }
+            }
+
+            if (_this.stats.pools[pool.name].confirmed && _this.stats.pools[pool.name].confirmed.blocks) {
+                for (var i=0; i<_this.stats.pools[pool.name].confirmed.blocks.length; i++) {
+                    allBlocks[pool.name+"-"+_this.stats.pools[pool.name].confirmed.blocks[i].split(':')[2]] = _this.stats.pools[pool.name].confirmed.blocks[i] + ':0';
+                }
+            }
+
+            pcb();
+        }, function(err) {
+            cback(allBlocks);
+        });
+    };
+    
    this.getBlocks = function (cback) {
         var allBlocks = {};
         async.each(_this.stats.pools, function(pool, pcb) {
